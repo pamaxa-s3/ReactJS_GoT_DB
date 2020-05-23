@@ -8,7 +8,7 @@ const Header = () => {
             <h3 className={style.headerTitle}>
                 <a href="#">Game of Thrones DB</a>
             </h3>
-            <Nav className={style.headerLinks}>
+            <Nav className={style.headerList}>
                 <NavLink className="headerLink" href="#">Characters</NavLink>
                 <NavLink className="headerLink" href="#">Houses</NavLink>
                 <NavLink className="headerLink" href="#">Books</NavLink>
