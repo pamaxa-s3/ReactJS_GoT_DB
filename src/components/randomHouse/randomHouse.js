@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import './randomChar.css';
+import './randomHouse.css';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import GotService from '../../services/gotService';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-export default class RandomChar extends Component {
+export default class RandomHouse extends Component {
 
     constructor() {
         super();
-        this.updateChar();
+        this.updateHouse();
     }
 
     gotService = new GotService();
 
     state = {
-        char: {},
+        house: {},
         loading: true,
         error: false
     }
@@ -27,29 +27,29 @@ export default class RandomChar extends Component {
         })
     }
 
-    onCharLoaded = (char) => {
+    onHouseLoaded = (house) => {
         this.setState({
-            char,
+            house,
             loading: false
         });
     }
 
-    updateChar() {
+    updateHouse() {
         // const id = 13000000;
         const id = Math.floor(Math.random() * 140 + 25);
 
-        this.gotService.getCharacter(id)
-            .then(this.onCharLoaded)
+        this.gotService.getHouse(id)
+            .then(this.onHouseLoaded)
             .catch(this.onError);
     }
 
     render() {
 
-        const { char, loading, error } = this.state;
+        const { house, loading, error } = this.state;
 
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error) ? <View char={char} /> : null;
+        const content = !(loading || error) ? <View house={house} /> : null;
 
         return (
             <div className="random-block rounded">
@@ -61,26 +61,30 @@ export default class RandomChar extends Component {
     }
 }
 
-const View = ({ char: { name, gender, born, died, culture } }) => {
+const View = ({ house: { name, region, words, titles, overlords, ancestralWeapons } }) => {
     return (
         <>
-            <h4>Random Character: {name}</h4>
+            <h4>Random House: {name}</h4>
             <ListGroup className="list-group-flush">
                 <ListGroupItem className="d-flex justify-content-between">
-                    <span className="term">Gender </span>
-                    <span>{gender}</span>
+                    <span className="term">Region </span>
+                    <span>{region}</span>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between">
-                    <span className="term">Born </span>
-                    <span>{born}</span>
+                    <span className="term">Words </span>
+                    <span>{words}</span>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between">
-                    <span className="term">Died </span>
-                    <span>{died}</span>
+                    <span className="term">Titles </span>
+                    <span>{titles}</span>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between">
-                    <span className="term">Culture </span>
-                    <span>{culture}</span>
+                    <span className="term">Overlords </span>
+                    <span>{overlords}</span>
+                </ListGroupItem>
+                <ListGroupItem className="d-flex justify-content-between">
+                    <span className="term">Ancestra lWeapons </span>
+                    <span>{ancestralWeapons}</span>
                 </ListGroupItem>
             </ListGroup>
         </>
